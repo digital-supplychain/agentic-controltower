@@ -1,0 +1,76 @@
+crew_manager_agent:
+  system_template: >-
+    You are a master project manager. Your goal is to lead your team of agents to solve the given task.
+
+    You have been entrusted with a knowledge base containing the project's memory files.
+    It is your responsibility to query this knowledge base to provide context to your team and to ensure that all decisions are made with the most up-to-date information.
+
+    Here are your custom instructions:
+    ---
+    {instructions}
+    ---
+
+    Use your knowledge base and tools to guide your team and make the best decisions.
+
+sustainability_flow:
+ check_sustainability_task:
+   description: >-
+     Evaluate the proposed action: '{proposed_action}' against the company's sustainability rules.
+     You MUST use the FileReadTool to read the 'Sustainability Rules' section
+     from the 'knowledge/sustainability_guide.md' file.
+     Based on these rules, provide a detailed analysis of the action's sustainability.
+   expected_output: >-
+     A JSON object matching the `EvaluationSection` data model, containing the overall status
+     and a list of individual `CheckResult` objects for the sustainability evaluation.
+
+ check_compliance_task:
+   description: >-
+     Evaluate the proposed action: '{proposed_action}' against the company's compliance regulations.
+     You MUST use the FileReadTool to read the 'Compliance Regulations' section
+     from the 'knowledge/sustainability_guide.md' file.
+     Based on these regulations, provide a detailed analysis of the action's compliance.
+   expected_output: >-
+     A JSON object matching the `EvaluationSection` data model, containing the overall status
+     and a list of individual `CheckResult` objects for the compliance evaluation.
+
+ generate_report_task:
+   description: >-
+     Synthesize the results from the sustainability and compliance checks into a single, final report.
+     The report must include a clear 'recommendation' (e.g., 'Approved', 'Rejected', 'Approved with conditions').
+
+   report_context: >-
+     Based on the following evaluation, generate a final recommendation.
+
+     Sustainability Check Results:
+     ---
+     {sustainability_check}
+     ---
+
+     Compliance Check Results:
+     ---
+     {compliance_check}
+     ---
+   expected_output: >-
+     A final JSON object matching the `SustainabilityReport` data model, containing the full
+     sustainability_check, compliance_check, and a final recommendation.
+
+optimization_script_generator:
+ prompt_template: >-
+   You are an expert in operations research and Python programming.
+   Your task is to write a complete, executable Python script to solve a linear programming problem using the PuLP library.
+
+   **Problem Description:**
+   ---
+   {problem_description}
+   ---
+
+   **Instructions:**
+   1.  Analyze the problem description to identify the decision variables, objective function, and constraints.
+   2.  Write a Python script that uses PuLP to model and solve this problem.
+   3.  **Crucially, solve the model using `model.solve(pulp.PULP_CBC_CMD(msg=False))` to suppress solver logs.**
+   4.  The script MUST conclude by printing a single JSON object to standard output.
+   5.  The JSON object must contain two keys:
+       - "objective_value": The optimal value of the objective function (as a float).
+       - "variable_values": A dictionary where keys are the names of the decision variables and values are their optimal values. **All values in this dictionary must be floats.**
+
+   **Do not include any other text, explanations, or markdown formatting in your output. The output must be only the raw Python code for the script.**

@@ -1,0 +1,39 @@
+[project]
+name = "supply-chain-agent"
+version = "0.1.0"
+description = "A multi-agent system for supply chain management."
+authors = [{ name = "Roo", email = "roo@agent.com" }]
+requires-python = ">=3.11"
+dependencies = [
+    "mcp[cli]",
+    "fastapi",
+    "uvicorn",
+    "crewai[tools]",
+    "python-dotenv",
+    "google-generativeai",
+    "crewai-tools[mcp]>=0.74.0",
+    "numpy",
+    "scipy",
+    "simpy",
+    "pulp"
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest",
+    "pytest-asyncio"
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["app", "mcp"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+pythonpath = "."
+
+[tool.uv.sources]
+supply-chain-agent = { path = "." }

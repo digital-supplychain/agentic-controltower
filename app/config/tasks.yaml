@@ -1,0 +1,11 @@
+initiate_or_update_memory_bank:
+  description: >-
+    Review and update the entire Memory Bank to ensure it is accurate and up-to-date.
+    You must read all files in the `app/memory_bank/` directory and compare them
+    against the project's current state. Follow the detailed guidelines in
+    `app/instructions/memory_bank_guide.md` to structure and maintain the memory files.
+    This is a critical task to ensure the project's continuity and your own effectiveness.
+  expected_output: >-
+    A confirmation that all Memory Bank files (`projectbrief.md`, `productContext.md`,
+    `activeContext.md`, `systemPatterns.md`, `techContext.md`, and `progress.md`)
+    have been reviewed and updated to reflect the current state of the project.
