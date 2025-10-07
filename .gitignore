@@ -4,3 +4,5 @@
 .env
 uv.lock
 */__pycache__/
+/supply_chain_agent.egg-info
+.gitignore
