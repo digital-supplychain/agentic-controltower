@@ -245,25 +245,26 @@ To demonstrate advanced decision-making, the **Inventory Optimization Agent** is
 graph TD
     subgraph Agentic SCCT
         IOA[Inventory Optimization Agent]
+        
+        subgraph Digital Twin
+            DT[Current State]
+        end
+
+        subgraph Simulation Environment
+            Tool[Simulation Tool]
+            Sim[SimPy Model <br/> beer_game_simulation.py]
+        end
     end
 
-    subgraph Digital Twin
-        DT[Current State]
-    end
 
-    subgraph Simulation Environment
-        direction LR
-        Tool[BeerGameSimulationTool] --> Sim[SimPy Model <br/> beer_game_simulation.py];
-    end
-
-    IOA -- "1. Reads" --> DT;
-    IOA -- "2. Proposes Policy 'A' & 'B'" --> Tool;
-    Tool -- "3. Runs Sim with 'A'" --> Sim;
-    Sim -- "4. Returns Results for 'A'" --> Tool;
-    Tool -- "5. Runs Sim with 'B'" --> Sim;
-    Sim -- "6. Returns Results for 'B'" --> Tool;
-    Tool -- "7. Summarizes Results" --> IOA;
-    IOA -- "8. Analyzes & Decides" --> Output[Final Order Decision];
+    IOA -- "(1) Reads State" --> DT;
+    IOA -- "(2) Proposes Policy 'A' & 'B'(e.g., 'Just-in-Time' vs. 'Safety-Stock') " --> Tool;
+    Tool -- "(3) Formulates & Runs Sim with 'A'" --> Sim;
+    Sim -- "(4) Returns Results for 'A'" --> Tool;
+    Tool -- "(5) Formulates & Runs Sim with 'B'" --> Sim;
+    Sim -- "(6) Returns Results for 'B'" --> Tool;
+    Tool -- "(7) Summarizes Results" --> IOA;
+    IOA -- "(8) Compares Simulation Results (Cost, Stockouts) & Decides" --> Output[Recommended Order Policy Decision];
 
     style IOA fill:#f9f,stroke:#333,stroke-width:2px
 ```
@@ -276,20 +277,28 @@ To demonstrate the most advanced level of agentic reasoning, the **Inventory Opt
 graph TD
     subgraph Agentic SCCT
         IOA[Inventory Optimization Agent]
+        
+        subgraph Digital Twin
+            DT[Current State]
+        end
+        
+        subgraph AI Powered Optimization Tool
+
+            Tool[Optimization Tool]
+            CodeGen[LLM]
+            Executor[Sandboxed Executor]
+        end
     end
 
-    subgraph Optimization Tool
-        direction LR
-        Tool[InventoryOptimizationTool] --> CodeGen[LLM Code Generation <br/> via SupplyChainOptimizer];
-        CodeGen -- "Generates PuLP Script" --> Executor[Sandboxed Executor];
-    end
 
-    IOA -- "1. Analyzes situation" --> IOA;
-    IOA -- "2. Formulates LP Problem Description (Text)" --> Tool;
-    Tool -- "3. Generates & Executes Code" --> Executor;
-    Executor -- "4. Returns Optimal Values" --> Tool;
-    Tool -- "5. Returns Structured Result" --> IOA;
-    IOA -- "6. Proposes Final Order" --> Output[Final Order Decision];
+    IOA -- "(1) Reads State" --> DT;
+    IOA -- "(2) Formulates LP Problem Description (as Text)" --> Tool;
+    Tool -- "(3) Requests Script Generation" --> CodeGen;
+    CodeGen -- "(4) Generates PuLP Script" --> Tool;
+    Tool -- "(5) Requests Script Excution" --> Executor;
+    Executor -- "(6) Returns Optimal Values (JSON)" --> Tool;
+    Tool -- "(7) Returns Structured Results" --> IOA;
+    IOA -- "(8) Analyzes Results & Decides" --> Output[Optimal Order Decision];
 
     style IOA fill:#f9f,stroke:#333,stroke-width:2px
 ```

@@ -8,14 +8,16 @@ dependencies = [
     "mcp[cli]",
     "fastapi",
     "uvicorn",
-    "crewai[tools]",
+    "crewai[google-genai,tools]>=1.2.0",
     "python-dotenv",
     "google-generativeai",
-    "crewai-tools[mcp]>=0.74.0",
+    "crewai-tools[mcp]>=1.2.0",
     "numpy",
     "scipy",
     "simpy",
-    "pulp"
+    "pulp",
+    "pytest>=8.4.2",
+    "pytest-asyncio>=1.2.0",
 ]
 
 [project.optional-dependencies]
