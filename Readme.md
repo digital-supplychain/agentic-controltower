@@ -1,6 +1,7 @@
 # Agentic Supply Chain Control Tower (SCCT)
 **A Proof-of-Concept for Autonomous Supply Chain Management** <img src="docs/images/ascct-logo.jpg" alt="Agentic SCCT Logo" width="120" style="vertical-align: middle;"/>
 
+ 
 ---
 
 ## The Challenge: From Analysis to Action
