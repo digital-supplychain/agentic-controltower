@@ -96,4 +96,4 @@ We welcome feedback, questions, and opportunities for collaboration. Please feel
 *   **Collaboration:** Explore opportunities to apply or extend this research.
 *   **Technical Support:** Report issues or ask questions about the codebase.
 
-**Contact:** `mousavi@sophia.ac.jp`
+**Contact:** Yacob Khojasteh — `khojast@sophia.ac.jp`
